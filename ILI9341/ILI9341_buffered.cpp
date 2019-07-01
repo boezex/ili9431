@@ -232,9 +232,26 @@ void ili9341::clear ()
         set_address_clear (0, 240, tft_h - 1, tft_w - 1);
     }
     
-    for (uint32_t i = 0; i < (19200); i++) //80 * 240 = 19200
+    for (uint32_t i = 0; i < 19200; i++) //80 * 240 = 19200
     {
         send_data16(ili9341_colors::black);
+    }
+}
+
+void ili9341::clear_dumb ()
+{
+    set_address_clear (0, 0, tft_h - 1, tft_w - 1);
+    for (uint8_t i = 0; i < 240; i++)
+    {
+        for (uint8_t j = 0; j < 240; j++)
+        {
+            is_pixel_written [i] [j] = false;
+            send_data16 (ili9341_colors::black);
+        }
+        for (uint16_t k = 240; k < 320; k++)
+        {
+            send_data16 (ili9341_colors::black);
+        }
     }
 }
 

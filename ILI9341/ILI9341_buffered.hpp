@@ -187,8 +187,14 @@ public:
     /// \brief
     /// Clear display funtion.
     /// \details
-    /// This function clears the display.
+    /// This function clears the display, pixel by pixel but only if that particular pixel has been overwritten by setPixel.
     void clear () override;
+
+    /// \brief
+    /// Clear display funtion.
+    /// \details
+    /// This function clears the display by spamming just the whole display.
+    void clear_dumb ();
 
     /// \brief
     /// Clear display partly funtion.
