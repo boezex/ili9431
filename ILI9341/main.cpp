@@ -201,7 +201,6 @@ int main(void)
             vl1.draw (tft1);
             vl2.draw (tft1);
         }
-
         else if (
             (griddata [0] == 2 && griddata [3] == 2 && griddata [6] == 2) ||
             (griddata [1] == 2 && griddata [4] == 2 && griddata [7] == 2) ||
@@ -217,6 +216,27 @@ int main(void)
 
             printWinMessageAndWait (display, but_confirm, but_select, 'O');
 
+            cursor = 0;
+            turn = true; //winner gets to start
+
+            for (uint8_t i = 0; i < 9; i++)
+            {
+                griddata [i] = 0;
+            }
+
+            tft1.clear ();
+
+            hl1.draw (tft1);
+            hl2.draw (tft1);
+            vl1.draw (tft1);
+            vl2.draw (tft1);
+        }
+        else if (
+            griddata [0] != 0 && griddata [1] != 0 && griddata [2] != 0 &&
+            griddata [3] != 0 && griddata [4] != 0 && griddata [5] != 0 &&
+            griddata [6] != 0 && griddata [7] != 0 && griddata [8] != 0
+           )
+        {
             cursor = 0;
             turn = true; //winner gets to start
 
