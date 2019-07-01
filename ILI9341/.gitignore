@@ -1,0 +1,7 @@
+*.o
+*.elf
+*.map
+bmptk_fixed_size_stack.c
+*.ld
+*.bin
+**/Linux\ app
