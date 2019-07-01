@@ -1,0 +1,124 @@
+#ifndef ILI9341_HPP
+#define ILI9341_HPP
+#include "hwlib.hpp"
+
+using namespace hwlib;
+
+/// @file
+
+/// \brief
+/// Enum class with a list of commands.
+/// \details
+/// Enum class with a list of commands to be used with the ili9341 chip, not all commands are listed but only the ones relevant to me.
+
+enum class ili9341_commands : uint8_t 
+{
+    sw_reset                    = 0x01, // perform software reset, no parameters
+    slp_in                      = 0x10, // go into sleep mode, no parameters
+    slp_out                     = 0x11, // go out of sleep mode, no parameters
+    ptl_on                      = 0x12, // partial on, no parameters
+    nor_on                      = 0x13, // normal on, no paramteters
+    inv_off                     = 0x20, // display inversion off, no parameters
+    inv_on                      = 0x21, // display inversion on, no parameters
+    gamma_set                   = 0x26, // gamma set, 1 parameter (correction setting)
+    disp_off                    = 0x28, // display off, no parameters
+    disp_on                     = 0x29, // display on, no parameters
+    ca_set                      = 0x2A, // column address set, 4 parameters: SC[15:8], SC[7:0], EC[15:8], EC[7:0]
+    pa_set                      = 0x2B, // page address set, 4 parameters: SP[15:8], SP[7:0], EP[15:8], EP[7:0]
+    ram_wr                      = 0x2C, // memory/ram write, 1 parameter: D[17:0]               (gek, 2 bytes?)
+    ptl_ar                      = 0x30, // partial area, 4 parameters: SR[15:8], SR[7:0], ER[15:8], ER[7:0]
+    vscr_def                    = 0x33, // vertical scrolling definition, 6 parameters: TFA[15:8], TFA[7:0], VSA[15:8], VSA[7:0], BFA[15:8], BFA[7:0]
+    mad_ctl                     = 0x36, // memory access control, 1 parameter: D[7] = MY, D[6] = MX, D[5] = MV, D[4] = ML, D[3] = BGR, D[2] = MH, D[1:0] = doesn't care
+    vscr_sadd                   = 0x37, // vertical scrolling start adress, 2 parameters: VSP[15:8], VSP[7:0]
+    pix_fmt                     = 0x3A, // pixel format set, see datasheet for details
+    frm_ctl1                    = 0xB1, // frame control (normal mode), see datasheet for details
+    frm_ctl2                    = 0xB2, // frame control (idle mode), see datasheet for details
+    frm_ctl3                    = 0xB3, // frame control (partial mode), see datasheet for details
+    inv_ctl                     = 0xB4, // display inversion control, 1 parameter: D[2] = NLA, D[1] = NLB, D[0] = NLC
+    dfunc_ctl                   = 0xB6, // display function control, 4 parameters, see datasheet for details
+    pw_ctl1                     = 0xC0, // power control, see datasheet for details
+    pw_ctl2                     = 0xC1, // power control, see datasheet for details
+    vm_ctl1                     = 0xC5, // VCOM control, see datasheet for details
+    vm_ctl2                     = 0xC7, // VCOM control, see datasheet for details
+    gmc_p                       = 0xE0, // gamma correction positive,  see datasheet for details
+    gmc_n                       = 0xE1  // gamma correction negative,  see datasheet for details
+};
+
+/// \brief
+/// Enum class with a list of colors.
+/// \details
+/// Enum class with a list of colors, useless because hwlib has this already. Used at the first stage of development.
+
+enum class ili9341_colors : uint16_t
+{
+    black                       = 0x0000,
+    purple                      = 0x708F,
+    blue                        = 0x001F,
+    green                       = 0x07E0,
+    red                         = 0xF800,
+    yellow                      = 0xFFE0,
+    white                       = 0xFFFF,
+    orange                      = 0xFD20,
+    pink                        = 0xFC18
+};
+
+/// \brief
+/// class to provide 
+class ili9341 : public window
+{
+    spi_bus & bus;
+    pin_out & res;
+    pin_out & dc;
+    pin_out & cs;
+
+    const uint16_t tft_h = 240; //x
+    const uint16_t tft_w = 320; //y
+   
+    xy cursor;
+
+    void send_command8 (ili9341_commands c);
+
+    void send_command8 (ili9341_commands c, uint8_t d0);
+
+    void send_command8 (ili9341_commands c, uint8_t d0, uint8_t d1);
+
+    void send_command8 (ili9341_commands c, uint8_t d0, uint8_t d1, uint8_t d2);
+
+    void send_command8 (ili9341_commands c, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
+
+    void send_command8 (ili9341_commands c, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3, uint8_t d4);
+
+    void send_command8 (ili9341_commands c, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3, uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7, uint8_t d8, uint8_t d9, uint8_t d10, uint8_t d11, uint8_t d12, uint8_t d13, uint8_t d14);
+
+    void send_data8 (uint8_t data);
+
+    void send_data16 (uint16_t data);
+
+    void send_data16 (ili9341_colors color);
+
+    void set_address (uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
+
+    uint16_t get_565_color (uint8_t red, uint8_t green, uint8_t blue);
+
+    void write_implementation (xy pos, color pixelcolor);
+
+public: 
+
+    ili9341 (spi_bus & bus, pin_out & res, pin_out & dc, pin_out & cs);
+
+    void init ();
+
+    void clear () override;
+
+    void flush () override;
+
+    void setPixel (uint16_t x, uint16_t y);
+
+    void setPixel (uint16_t x, uint16_t y, uint16_t color);
+
+    void sw_reset ();
+
+    void disp_off ();
+};
+
+#endif //ILI9341_HPP
