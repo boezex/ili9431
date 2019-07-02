@@ -29,3 +29,4 @@ There are 3 'main' files. The default main file is the demo game. To upload one 
 ## Miscellaneous comments on the project
 - The display writing would have been much faster if hwlib supported the hardware SPI interface on the DUE boards. The current SPI clock is around 300 kHz, but the hardware on the DUE is reported to handle up to 16 MHz.
 - The display.clear() function(s) are not as optimised as I'd have liked. Mainly because the stack provided by BMPTK is not big enough to hold all the display's pixels in memory.
+- This readme acts as a kind of report as required by IPASS as well.
