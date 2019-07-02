@@ -87,6 +87,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0461d51da5b2c5557104aaa8b7488ffa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classili9341.html#a0461d51da5b2c5557104aaa8b7488ffa">clear</a> () override</td></tr>
 <tr class="memdesc:a0461d51da5b2c5557104aaa8b7488ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear display funtion.  <a href="#a0461d51da5b2c5557104aaa8b7488ffa">More...</a><br /></td></tr>
 <tr class="separator:a0461d51da5b2c5557104aaa8b7488ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac026f66c5a8fbad1192951bb286b69d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classili9341.html#aac026f66c5a8fbad1192951bb286b69d">clear_dumb</a> ()</td></tr>
+<tr class="memdesc:aac026f66c5a8fbad1192951bb286b69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear display funtion.  <a href="#aac026f66c5a8fbad1192951bb286b69d">More...</a><br /></td></tr>
+<tr class="separator:aac026f66c5a8fbad1192951bb286b69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa67ae0eb30f28966d99d5df0eb5643bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classili9341.html#aa67ae0eb30f28966d99d5df0eb5643bd">clearPart</a> (uint16_t x_start, uint16_t y_start, uint16_t x_end, uint16_t y_end)</td></tr>
 <tr class="memdesc:aa67ae0eb30f28966d99d5df0eb5643bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear display partly funtion.  <a href="#aa67ae0eb30f28966d99d5df0eb5643bd">More...</a><br /></td></tr>
 <tr class="separator:aa67ae0eb30f28966d99d5df0eb5643bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,7 +181,27 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Clear display funtion. </p>
-<p>This function clears the display. </p>
+<p>This function clears the display, pixel by pixel but only if that particular pixel has been overwritten by setPixel. </p>
+
+</div>
+</div>
+<a id="aac026f66c5a8fbad1192951bb286b69d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac026f66c5a8fbad1192951bb286b69d">&#9670;&nbsp;</a></span>clear_dumb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ili9341::clear_dumb </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear display funtion. </p>
+<p>This function clears the display by spamming just the whole display. </p>
 
 </div>
 </div>
@@ -379,7 +402,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 1 2019 14:52:20 for Week 2 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 2 2019 17:44:13 for Week 2 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

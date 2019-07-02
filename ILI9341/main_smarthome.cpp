@@ -1,8 +1,6 @@
 #include "hwlib.hpp"
 #include "ILI9341_buffered.hpp"
 
-// no timing included in this test due to inconsistent results when using the hwlib::now_us() for timing.
-
 int main(void)
 {
   auto tft_reset = hwlib::target::pin_out(hwlib::target::pins::d8);
