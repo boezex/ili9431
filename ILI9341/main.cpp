@@ -15,7 +15,7 @@ int main(void)
 
   auto tft1 = ili9341(spi, tft_reset, tft_dc, tft_cs);
 
-  tft1.setRotation (true);
+  tft1.setRotation(true);
 
   WDT->WDT_MR = WDT_MR_WDDIS;
 
@@ -25,56 +25,210 @@ int main(void)
   auto font = hwlib::font_default_16x16();
   auto display = hwlib::terminal_from(tft1, font);
 
-  hwlib::cout << "Testing the ILI9341 library ..." << "\n\n";
-
-  hwlib::cout << "Printing X-signs on the screen" << "\n\n";
-
-  for (uint16_t i = 0; i < 15; i++)
+  while (true)
   {
-    for (uint16_t j = 0; j < 20; j++)
+
+    //======================================== 
+    // Daans kamer
+    display.cursor_set (xy (0,0));
+    char daanskamer[] = "Daans kamer:";
+    uint8_t sizekamer = 12;
+
+    for (int i = 0; i < sizekamer; i++)
     {
-      display.cursor_set (xy (i, j));
-      display.putc ('X');
+      display.putc(daanskamer[i]);
     }
-  }
 
-  hwlib::wait_ms (5000);
+    hwlib::cout << "1\n";
 
-  tft1.clear ();
+    char kamerdata[20];
+    uint8_t size_text = 0;
 
-  hwlib::cout << "Printing six lines on the screen" << "\n\n";
+    display.cursor_set(xy(0, 1));
 
-  line hl1 (xy (80, 0), xy (80, 320));
-  hl1.draw (tft1);
+    while (true)
+    {
+      char in;
 
-  line hl2 (xy (160, 0), xy (160, 320));
-  hl2.draw (tft1);
+      hwlib::cin >> in;
 
-  line vl1 (xy (0, 107), xy (240, 107));
-  vl1.draw (tft1);
-
-  line vl2 (xy (0, 214), xy (240, 214));
-  vl2.draw (tft1);
-
-  line diag1 (xy (0, 0), xy (240, 320));
-  diag1.draw (tft1);
-
-  line diag2 (xy (240, 0), xy (0, 320));
-  diag2.draw (tft1);
-
-  hwlib::wait_ms (5000);
-
-  tft1.clear ();
-
-  hwlib::cout << "Printing the screen totally white" << "\n\n";
-
-  for (uint8_t i = 0; i < 240; i++)
-  {
-    for (uint16_t j = 0; j < 320; j++)
-    { 
-      tft1.setPixel (i, j);
+      if (in != '\n')
+      {
+        kamerdata[size_text] = in;
+        size_text++;
+      }
+      else
+      {
+        break;
+      }
     }
-  }
 
-  hwlib::cout << "End of the test" << "\n\n";
+    for (int i = 0; i < size_text; i++)
+    {
+      display.putc(kamerdata[i]);
+    }
+
+    //========================================
+    // Schakelaar
+    display.cursor_set (xy (0, 3));
+    char switchname[] = "Schakelaar:";
+    uint8_t sizeswitch = 11;
+
+    for (int i = 0; i < sizeswitch; i++)
+    {
+      display.putc(switchname[i]);
+    }
+
+    hwlib::cout << "2\n";
+
+    char switchdata[20];
+    size_text = 0;
+
+    display.cursor_set(xy(0, 4));
+
+    while (true)
+    {
+      char in;
+
+      hwlib::cin >> in;
+
+      if (in != '\n')
+      {
+        switchdata[size_text] = in;
+        size_text++;
+      }
+      else
+      {
+        break;
+      }
+    }
+
+    for (int i = 0; i < size_text; i++)
+    {
+      display.putc(switchdata[i]);
+    }
+
+    //========================================
+    // Woonkamer
+    display.cursor_set (xy (0, 6));
+    char kamername[] = "Woonkamer:";
+    uint8_t sizewoonkamer = 10;
+
+    for (int i = 0; i < sizewoonkamer; i++)
+    {
+      display.putc(kamername[i]);
+    }
+
+    hwlib::cout << "3\n";
+
+    char woonkamerdata[20];
+    size_text = 0;
+
+    display.cursor_set(xy(0, 7));
+
+    while (true)
+    {
+      char in;
+
+      hwlib::cin >> in;
+
+      if (in != '\n')
+      {
+        woonkamerdata[size_text] = in;
+        size_text++;
+      }
+      else
+      {
+        break;
+      }
+    }
+
+    for (int i = 0; i < size_text; i++)
+    {
+      display.putc(woonkamerdata[i]);
+    }
+
+    //========================================
+    // CV Set temp
+    display.cursor_set (xy (0, 9));
+    char cvtempname[] = "CV set temp:";
+    uint8_t sizecvtemp = 12;
+
+    for (int i = 0; i < sizecvtemp; i++)
+    {
+      display.putc(cvtempname[i]);
+    }
+
+    hwlib::cout << "4\n";
+
+    char cvtempdata[20];
+    size_text = 0;
+
+    display.cursor_set(xy(0, 10));
+
+    while (true)
+    {
+      char in;
+
+      hwlib::cin >> in;
+
+      if (in != '\n')
+      {
+        cvtempdata[size_text] = in;
+        size_text++;
+      }
+      else
+      {
+        break;
+      }
+    }
+
+    for (int i = 0; i < size_text; i++)
+    {
+      display.putc(cvtempdata[i]);
+    }
+
+    //========================================
+    // CV pressure
+    display.cursor_set (xy (0, 12));
+    char cvpressname[] = "CV pressure:";
+    uint8_t sizecvpress = 12;
+
+    for (int i = 0; i < sizecvpress; i++)
+    {
+      display.putc(cvpressname[i]);
+    }
+
+    hwlib::cout << "5\n";
+
+    char cvpressdata[20];
+    size_text = 0;
+
+    display.cursor_set(xy(0, 13));
+
+    while (true)
+    {
+      char in;
+
+      hwlib::cin >> in;
+
+      if (in != '\n')
+      {
+        cvpressdata[size_text] = in;
+        size_text++;
+      }
+      else
+      {
+        break;
+      }
+    }
+
+    for (int i = 0; i < size_text; i++)
+    {
+      display.putc(cvpressdata[i]);
+    }
+
+    hwlib::wait_ms(8000);
+    tft1.clear();
+  }
 }
